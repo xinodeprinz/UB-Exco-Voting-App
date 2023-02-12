@@ -1,0 +1,109 @@
+@import "./colors.css";
+.main {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to left, var(--tick-blue) 50%, var(--light-blue) 50%);
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+}
+
+.formBackground {
+    border-radius: 150px;
+    width: inherit;
+    z-index: 1;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 0.6rem;
+}
+
+.title {
+    text-transform: capitalize;
+    font-size: 25px;
+    color: var(--tick-blue);
+    font-weight: bold;
+}
+
+.formControl:focus {
+    outline: none;
+    box-shadow: none !important;
+    border-color: var(--tick-blue) !important;
+}
+
+.formControl {
+    height: 3rem;
+    border-radius: 0 !important;
+}
+
+.formControl::placeholder {
+    font-weight: 600;
+    color: var(--tick-blue) !important;
+}
+
+.checkInput:focus {
+    box-shadow: none !important;
+}
+
+.checkInput:checked {
+    background-color: var(--tick-blue) !important;
+    border-color: var(--tick-blue) !important;
+}
+
+.checkInput {
+    cursor: pointer;
+}
+
+.checkText {
+    color: var(--tick-blue);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.loginBtn {
+    background-color: var(--tick-blue) !important;
+    color: white !important;
+    width: 100%;
+    border-radius: 0 !important;
+    height: 3rem;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
+.loginBtn:hover {
+    background-color: var(--tick-blue) !important;
+    opacity: 0.9;
+    color: white;
+}
+
+.voteBackground {
+    width: 100% !important;
+    height: 100% !important;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.form {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+@media(max-width: 767px) {
+    .main {
+        height: 100vh;
+        width: 100vw;
+        background-image: url('../images/vote-img.png');
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .form {
+        border-radius: 0;
+    }
+}

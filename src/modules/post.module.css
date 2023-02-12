@@ -1,0 +1,36 @@
+.header {
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--tick-blue) !important;
+    color: white !important;
+    font-size: 25px;
+}
+
+.link {
+    display: block;
+    margin-top: -0.8rem;
+    color: var(--tick-blue);
+}
+
+.btn {
+    width: 100%;
+    color: white !important;
+    background-color: var(--secondary) !important;
+    text-transform: capitalize !important;
+    border-radius: 0 !important;
+    font-weight: 600 !important;
+}
+
+.btn:hover {
+    background-color: var(--tick-blue) !important;
+}
+
+.text {
+    color: var(--normal-color) !important;
+}
+
+.candidates {
+    color: var(--tick-blue);
+    text-transform: capitalize;
+}

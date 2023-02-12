@@ -1,0 +1,98 @@
+.card {
+  border: 0 !important;
+}
+
+.image {
+  border: 5px solid white;
+  border-bottom: 0;
+  height: 200px;
+  width: 100%;
+  object-fit: fill;
+  position: relative;
+}
+
+.cardBody {
+  text-align: center;
+}
+
+.info div:first-child {
+  font-size: 20px;
+  color: var(--tick-blue);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.matricule {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--normal-color);
+  font-size: 14px;
+}
+
+.info div:last-child {
+  font-size: 16px;
+  color: var(--normal-color);
+  text-transform: capitalize;
+}
+
+.votes {
+  position: absolute;
+  left: 13px;
+  top: 20px;
+  background-color: var(--secondary);
+  color: white;
+  padding: 5px 10px;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 100%;
+  background-color: var(--tick-blue) !important;
+  color: white !important;
+  margin-top: 0.6rem;
+  border-radius: 0 !important;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.btn:hover {
+  background-color: var(--secondary) !important;
+}
+
+.position {
+  position: absolute;
+  right: 13px;
+  top: 20px;
+  background-color: var(--secondary);
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold !important;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+.winner {
+  font-size: 14px;
+  margin-left: 0.3rem;
+}
+
+.post {
+  width: 100%;
+  background-color: var(--tick-blue) !important;
+  color: white !important;
+  margin-top: 0.6rem;
+  border-radius: 0 !important;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: capitalize;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 991px) {
+  .image {
+    height: 250px;
+  }
+}

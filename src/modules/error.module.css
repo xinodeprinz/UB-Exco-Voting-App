@@ -1,0 +1,30 @@
+@import "./colors.css";
+.main {
+    margin-top: 3rem !important;
+}
+
+.main h1 {
+    text-transform: capitalize;
+    color: var(--tick-blue);
+}
+
+.main p {
+    font-size: 22px;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.btn {
+    background-color: var(--tick-blue) !important;
+    color: white !important;
+    border-radius: 5px !important;
+    text-transform: capitalize !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 20px !important;
+}
+
+.btn:hover {
+    color: white !important;
+    background-color: var(--secondary) !important;
+}
