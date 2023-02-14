@@ -1,0 +1,45 @@
+@import "./colors.css";
+
+.title {
+  color: var(--tick-blue);
+  text-align: center !important;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.title span {
+  margin-left: 0.5rem;
+  color: var(--secondary);
+}
+
+.faculty,
+.department {
+  display: block;
+  border-radius: 0;
+  width: 100%;
+  color: white;
+  height: 3rem;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.faculty,
+.faculty:hover {
+  background-color: var(--tick-blue) !important;
+  margin-bottom: 0.7rem !important;
+  color: white !important;
+}
+
+.faculty:hover,
+.department:hover {
+  opacity: 0.8;
+  background-color: inherit;
+}
+
+.department,
+.department:hover {
+  background-color: var(--secondary) !important;
+  color: white !important;
+}

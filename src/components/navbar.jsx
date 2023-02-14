@@ -1,7 +1,17 @@
 import styles from "../modules/navbar.module.css";
 import photo from "../images/empty.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Links from "./links";
+import { FaSignOutAlt } from "react-icons/fa";
 const Navbar = () => {
+  const [uri, setUri] = useState("");
+
+  useEffect(() => {
+    const { pathname } = window.location;
+    setUri(pathname);
+  }, []); //Pleas remove the dependency array for a proper functioning.
+
   return (
     <nav className={`navbar navbar-expand-lg shadow-lg ${styles.navbar}`}>
       <div className="container-fluid">
@@ -38,25 +48,16 @@ const Navbar = () => {
               </Link>
               <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
                 <li>
-                  <a className="dropdown-item" href="/">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Something else here
-                  </a>
+                  <button className="dropdown-item">
+                    <FaSignOutAlt />
+                    <span className="ms-1">Logout</span>
+                  </button>
                 </li>
               </ul>
             </li>
+            <div className="d-lg-none">
+              <Links uri={uri} styles={styles} />
+            </div>
           </ul>
         </div>
       </div>

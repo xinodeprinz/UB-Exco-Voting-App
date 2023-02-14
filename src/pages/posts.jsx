@@ -2,10 +2,17 @@ import Navbar from "../components/navbar";
 import Post from "../components/post";
 import Sidebar from "../components/sidebar";
 import styles from "../modules/posts.module.css";
+import Modal from "../components/modal";
 
 const Posts = () => {
+  const triggerModal = () => {
+    const showModal = document.getElementById("showModal");
+    showModal.click();
+  };
+
   return (
     <div className="row g-0">
+      <Modal />
       <div className="col-lg-4 col-xl-3">
         <Sidebar />
       </div>
@@ -20,7 +27,7 @@ const Posts = () => {
           <div className="row">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div className="col-md-6 mb-3" key={i}>
-                <Post />
+                <Post triggerModal={triggerModal} />
               </div>
             ))}
           </div>

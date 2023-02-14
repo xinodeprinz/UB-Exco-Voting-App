@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "../modules/post.module.css";
 
-const Post = () => {
+const Post = ({ triggerModal }) => {
   return (
     <div className={`card h-100 ${styles.card}`}>
       <div className={`card-header ${styles.header}`}>president</div>
@@ -21,9 +21,12 @@ const Post = () => {
           <div className={styles.candidates}>0 candidates</div>
         </div>
 
-        <Link to="#" className={`btn mt-3 py-2 ${styles.btn}`}>
+        <button
+          className={`btn mt-3 py-2 ${styles.btn}`}
+          onClick={triggerModal}
+        >
           Apply
-        </Link>
+        </button>
       </div>
     </div>
   );

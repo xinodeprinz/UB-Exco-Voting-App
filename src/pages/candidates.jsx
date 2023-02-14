@@ -6,7 +6,10 @@ import styles from "../modules/candidates.module.css";
 import Candidate from "../components/candidate";
 
 const Candidates = ({ isElection = false, isWinner = false }) => {
-  const [time, setTime] = useState({ hours: 0, minutes: 0, seconds: 1 });
+  const [time, setTime] = useState({ hours: 1, minutes: 0, seconds: 1 });
+  const [showPosition, setShowPosition] = useState(false);
+  const [timerColour, setTimerColour] = useState("time");
+
   useEffect(() => {
     votingTime();
   });
@@ -26,9 +29,15 @@ const Candidates = ({ isElection = false, isWinner = false }) => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       setTime({ hours, minutes, seconds });
     }, 1000);
+
     if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
       clearTimeout(timeout);
+      setShowPosition(true);
       alert("Time up");
+    }
+
+    if (time.hours === 0 && time.minutes < 11) {
+      setTimerColour("lessTime"); //Changes the timer colour to red.
     }
   };
 
@@ -54,10 +63,10 @@ const Candidates = ({ isElection = false, isWinner = false }) => {
 
           <div className="d-md-flex justify-content-between align-items-center">
             <div className={styles.sectionTitle}>
-              <h1>{post} candidates</h1>
+              <h1>{isWinner ? "winners" : `${post} candidates`}</h1>
             </div>
             {isElection ? (
-              <div className={`${styles.time} mb-3 mb-md-0`}>
+              <div className={`${styles[timerColour]} mb-3 mb-md-0`}>
                 <span>voting ends in: </span>
                 <span>
                   {time.hours.toString().padStart(2, 0)}:
@@ -71,7 +80,11 @@ const Candidates = ({ isElection = false, isWinner = false }) => {
           <div className="row">
             {[1, 2, 3, 4].map((i) => (
               <div className="col-sm-6 col-xl-3 mb-3" key={i}>
-                <Candidate isElection={isElection} isWinner={isWinner} />
+                <Candidate
+                  isElection={isElection}
+                  isWinner={isWinner}
+                  showPosition={showPosition}
+                />
               </div>
             ))}
           </div>
