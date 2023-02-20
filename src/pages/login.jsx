@@ -2,12 +2,43 @@ import styles from "../modules/login.module.css";
 import UBLogo from "../images/ub-logo.png";
 import vote from "../images/vote-img.png";
 import { useNavigate } from "react-router-dom";
+import sweetAlert from "../components/alert";
+import { useState } from "react";
+import axios from "../components/axios";
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/userSlice";
+import { ButtonSpinner } from "../components/helpers";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogin = (e) => {
+
+  const [data, setData] = useState({ matricule: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInput = (e) => {
+    setData({ ...data, [e.target.id]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    navigate("/home");
+    try {
+      const res = await axios.post("/login", data);
+      console.log(res);
+      sweetAlert({ icon: "success", title: res.data.message });
+      const token = res.data.token;
+      const user = res.data.user;
+      // Storing user in the redux store.
+      dispatch(userActions.updateUser(user));
+      localStorage.setItem("token", JSON.stringify(token));
+      //  Clearing all input fields
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach((i) => (i.value = ""));
+      navigate("/home");
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
   return (
     <div className={styles.main}>
@@ -33,6 +64,7 @@ const Login = () => {
                   <input
                     type="text"
                     id="matricule"
+                    onChange={handleInput}
                     placeholder="Matricule"
                     className={`form-control ${styles.formControl}`}
                   />
@@ -41,6 +73,7 @@ const Login = () => {
                   <input
                     type="password"
                     id="password"
+                    onChange={handleInput}
                     placeholder="Password"
                     className={`form-control ${styles.formControl}`}
                   />
@@ -59,8 +92,16 @@ const Login = () => {
                       Keep me logged in
                     </label>
                   </div>
-                  <button type="submit" className={`btn ${styles.loginBtn}`}>
-                    Login
+                  <button
+                    type="submit"
+                    className={`btn d-flex align-items-center 
+                    justify-content-center text-capitalize ${styles.loginBtn}`}
+                  >
+                    {isLoading ? (
+                      <ButtonSpinner color="white" text="loading..." />
+                    ) : (
+                      "Login"
+                    )}
                   </button>
                 </div>
               </form>

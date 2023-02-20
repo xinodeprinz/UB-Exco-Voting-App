@@ -47,9 +47,9 @@
   z-index: 1;
 }
 
-.btn {
+.btn,
+.voted {
   width: 100%;
-  background-color: var(--tick-blue) !important;
   color: white !important;
   margin-top: 0.6rem;
   border-radius: 0 !important;
@@ -58,8 +58,20 @@
   text-transform: capitalize;
 }
 
+.btn {
+  background-color: var(--tick-blue) !important;
+}
+
+.voted {
+  background-color: var(--danger) !important;
+}
+
 .btn:hover {
   background-color: var(--secondary) !important;
+}
+
+.voted:hover {
+  opacity: 0.9;
 }
 
 .position {

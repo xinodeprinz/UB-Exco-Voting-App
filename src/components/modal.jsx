@@ -1,6 +1,6 @@
 import styles from "../modules/modal.module.css";
 
-const Modal = () => {
+const Modal = ({ becomeACandidate }) => {
   return (
     <>
       <button
@@ -29,13 +29,22 @@ const Modal = () => {
               <button
                 type="button"
                 className="btn-close"
+                id="closeModal"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+              />
             </div>
             <div className="modal-body">
-              <button className={`btn ${styles.faculty}`}>faculty level</button>
-              <button className={`btn ${styles.department}`}>
+              <button
+                className={`btn ${styles.faculty}`}
+                onClick={() => becomeACandidate("faculty")}
+              >
+                faculty level
+              </button>
+              <button
+                className={`btn ${styles.department}`}
+                onClick={() => becomeACandidate("department")}
+              >
                 departmental level
               </button>
             </div>

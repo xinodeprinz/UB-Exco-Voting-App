@@ -17,20 +17,16 @@ const router = createBrowserRouter([{
   element: < Posts />,
 },
 {
-  path: "/faculty/:post/candidates",
+  path: "/:type/:post/candidates",
   element: < Candidates />,
 },
 {
-  path: "/department/:post/candidates",
-  element: < Candidates />,
-},
-{
-  path: "/elections",
+  path: "/:type/:post/elections",
   element: < Candidates isElection={true}
   />,
 },
 {
-  path: "/winners",
+  path: "/:type/:post/winners",
   element: < Candidates isWinner={true}
   />,
 },

@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 
 const Links = ({ uri, styles }) => {
+  const { pathname } = window.location;
+  const path = pathname.split("/").pop();
+
   return (
     <div>
       <li className="nav-item">
@@ -35,9 +38,10 @@ const Links = ({ uri, styles }) => {
       </li>
       <li className="nav-item dropdown">
         <Link
-          className={`nav-link dropdown-toggle ${styles.link}`}
+          className={`nav-link dropdown-toggle ${styles.link} ${
+            path === "candidates" ? styles.active : ""
+          }`}
           data-bs-toggle="dropdown"
-          to="/posts"
         >
           <FaUsers />
           <span className="ms-1">candidates</span>
@@ -51,28 +55,45 @@ const Links = ({ uri, styles }) => {
           </Link>
         </div>
       </li>
-      <li className="nav-item">
+      <li className="nav-item dropdown">
         <Link
-          className={`nav-link ${uri === "/elections" ? styles.active : ""} ${
-            styles.link
+          className={`nav-link dropdown-toggle ${styles.link} ${
+            path === "elections" ? styles.active : ""
           }`}
-          to="/elections"
+          data-bs-toggle="dropdown"
         >
           <FaCuttlefish />
           <span className="ms-1">elections</span>
         </Link>
+        <div className="dropdown-menu">
+          <Link to="/faculty/president/elections" className="dropdown-item">
+            Faculty
+          </Link>
+          <Link to="/department/president/elections" className="dropdown-item">
+            Departmental
+          </Link>
+        </div>
       </li>
-      <li className="nav-item">
+      <li className="nav-item dropdown">
         <Link
-          className={`nav-link ${uri === "/winners" ? styles.active : ""} ${
-            styles.link
+          className={`nav-link dropdown-toggle ${styles.link} ${
+            path === "winners" ? styles.active : ""
           }`}
-          to="/winners"
+          data-bs-toggle="dropdown"
         >
           <FaTrophy />
           <span className="ms-1">winners</span>
         </Link>
+        <div className="dropdown-menu">
+          <Link to="/faculty/president/winners" className="dropdown-item">
+            Faculty
+          </Link>
+          <Link to="/department/president/winners" className="dropdown-item">
+            Departmental
+          </Link>
+        </div>
       </li>
+
       <li className="nav-item">
         <Link
           className={`nav-link ${uri === "/campaign" ? styles.active : ""} ${

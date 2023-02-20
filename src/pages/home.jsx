@@ -12,7 +12,7 @@ const Home = () => {
         <Navbar />
 
         <main className={`container-fluid my-4 ${styles.main}`}>
-          <div className={styles.sectionTitle}>
+          <div className="section-title">
             <h1>about us</h1>
           </div>
 

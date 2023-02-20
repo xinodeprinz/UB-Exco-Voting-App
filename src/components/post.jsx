@@ -1,20 +1,18 @@
 import { Link } from "react-router-dom";
 import styles from "../modules/post.module.css";
 
-const Post = ({ triggerModal }) => {
+const Post = ({ triggerModal, post }) => {
   return (
     <div className={`card h-100 ${styles.card}`}>
-      <div className={`card-header ${styles.header}`}>president</div>
+      <div className={`card-header ${styles.header}`}>{post.name}</div>
       <div className="card-body">
         <p className={`card-text ${styles.text}`}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex inventore
-          fuga unde reprehenderit mollitia magnam deserunt aperiam consequatur
-          magni repudiandae!
+          {post.description.substr(0, 200)}
         </p>
         <div className="d-flex justify-content-between align-items-center">
           <Link
             className={`card-link text-capitalize ${styles.link}`}
-            to="/president/about"
+            to={`/${post.name.replaceAll(" ", "-")}/about`}
           >
             Read More
           </Link>
@@ -23,7 +21,7 @@ const Post = ({ triggerModal }) => {
 
         <button
           className={`btn mt-3 py-2 ${styles.btn}`}
-          onClick={triggerModal}
+          onClick={() => triggerModal(post.id)}
         >
           Apply
         </button>

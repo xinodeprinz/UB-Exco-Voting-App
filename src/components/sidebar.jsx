@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import styles from "../modules/sidebar.module.css";
 import UBLogo from "../images/ub-logo.png";
 import Links from "./links";
 
 const Sidebar = () => {
-  const [uri, setUri] = useState("");
-
-  useEffect(() => {
-    const { pathname } = window.location;
-    setUri(pathname);
-  }, []); //Pleas remove the dependency array for a proper functioning.
+  const { pathname } = window.location;
 
   return (
     <div className={styles.container}>
@@ -25,7 +19,7 @@ const Sidebar = () => {
           </div>
 
           <ul className="nav flex-column">
-            <Links uri={uri} styles={styles} />
+            <Links uri={pathname} styles={styles} />
           </ul>
         </div>
       </aside>

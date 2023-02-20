@@ -1,13 +1,1 @@
 @import "../modules/colors.css";
-.sectionTitle {
-    text-transform: capitalize;
-    color: var(--tick-blue);
-    margin-bottom: 1.5rem;
-}
-
-.sectionTitle h1 {
-    border-bottom: 3px solid var(--secondary);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-    font-size: 30px;
-}

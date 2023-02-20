@@ -2,47 +2,39 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import styles from "../modules/about.module.css";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "../components/axios";
 
 const About = () => {
   const { post } = useParams();
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  const getPost = async () => {
+    const res = await axios.get(`/posts/name/${post}`);
+    setData(res.data);
+    setIsLoading(false);
+  };
   return (
     <div className="row g-0">
       <div className="col-lg-4 col-xl-3">
         <Sidebar />
       </div>
       <div className="col-lg-8 col-xl-9">
-        <Navbar />
+        <Navbar isLoading={isLoading} />
 
         <main className="container-fluid my-4">
-          <div className={styles.sectionTitle}>
-            <h1>duties of the {post}</h1>
+          <div className="section-title">
+            <h1>duties of the {post.replaceAll("-", " ")}</h1>
           </div>
 
           <ul className={styles.list}>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-              ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-              doloribus similique id culpa minus reprehenderit nemo aspernatur.
-              Voluptates quos ratione corrupti atque odio vero soluta illum
-              aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-              accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-              ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-              doloribus similique id culpa minus reprehenderit nemo aspernatur.
-              Voluptates quos ratione corrupti atque odio vero soluta illum
-              aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-              accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-              ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-              doloribus similique id culpa minus reprehenderit nemo aspernatur.
-              Voluptates quos ratione corrupti atque odio vero soluta illum
-              aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-              accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-            </li>
+            {data &&
+              data.description.map((text, key) => <li key={key}>{text}</li>)}
           </ul>
         </main>
       </div>
