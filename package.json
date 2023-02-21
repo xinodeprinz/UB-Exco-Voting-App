@@ -1,0 +1,28 @@
+{
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-fastest-validator": "^1.0.7",
+        "express-fileupload": "^1.4.0",
+        "express-json-error-handler": "^5.0.4",
+        "http-errors": "^2.0.0",
+        "jsonwebtoken": "^9.0.0",
+        "knex": "^2.4.2",
+        "mysql": "^2.18.1",
+        "objection": "^3.0.1"
+    },
+    "scripts": {
+        "start": "nodemon ./app.js",
+        "migrate": "npx knex migrate:latest --knexfile ./src/database/knexfile.js",
+        "rollback": "npx knex migrate:rollback --all --knexfile ./src/database/knexfile.js",
+        "rolldown": "npx knex migrate:down --knexfile ./src/database/knexfile.js",
+        "make-seed": "npx knex seed:make dev --knexfile ./src/database/knexfile.js",
+        "seed": "npx knex seed:run --knexfile ./src/database/knexfile.js"
+    },
+    "type": "module",
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
+}
