@@ -1,0 +1,7 @@
+@import "./colors.css";
+
+.list li {
+  font-size: 18px;
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}

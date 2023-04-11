@@ -1,0 +1,28 @@
+@import "./colors.css";
+
+.loading-spinner {
+  height: "50vh";
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  text-align: "center";
+  color: var(--tick-blue);
+  font-size: 25px;
+  font-weight: 600;
+  z-index: 5;
+  position: relative;
+  top: 10rem;
+}
+
+.section-title {
+  text-transform: capitalize;
+  color: var(--tick-blue);
+  margin-bottom: 1.5rem;
+}
+
+.section-title h1 {
+  border-bottom: 3px solid var(--secondary);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+  font-size: 30px;
+}

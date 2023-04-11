@@ -1,0 +1,55 @@
+@import "../modules/colors.css";
+
+.select {
+  border: 0 !important;
+  border-bottom: 2px solid var(--tick-blue) !important;
+  border-radius: 0 !important;
+}
+
+.select:focus {
+  outline: 0;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition: none;
+}
+
+.select,
+.select option {
+  text-transform: capitalize !important;
+  font-size: 19px !important;
+  color: var(--normal-color) !important;
+}
+
+.select {
+  font-weight: 600 !important;
+  color: var(--secondary) !important;
+  margin-bottom: 1rem !important;
+}
+
+.time,
+.lessTime {
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.time {
+  background-color: var(--tick-blue);
+}
+
+.lessTime {
+  color: white;
+  background-color: var(--danger);
+}
+
+.time span:first-child {
+  font-size: 15px;
+  color: aliceblue;
+}
+
+.time span:last-child {
+  font-size: 17px;
+  color: white;
+}
