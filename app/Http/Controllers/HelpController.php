@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Post;
+use App\Models\Winner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
 
@@ -118,25 +119,14 @@ class HelpController extends Controller
     public static function canVote(): bool
     {
         $user = Auth::user();
-        // Did not even register for any departmental post.
-        if (!$user->candidates()->where('type', 'department')->exists()) {
-            return false;
+        if (
+            Winner::where('user_id', $user->id)
+            ->where('type', 'department')
+            ->exists()
+        ) {
+            return true;
         }
-
-        $cc = Candidate::all();
-        $neededCC = [];
-
-        foreach ($cc as $c) {
-            if (
-                $c->user->faculty === $user->faculty
-                && $c->user->department === $user->department
-            ) {
-                array_push($neededCC, $c);
-            }
-        }
-
-        // Still needs to be worked on, but return true for now.
-        return true;
+        return false;
     }
 
     public static function postWinnerId(array $results): int

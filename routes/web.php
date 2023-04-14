@@ -45,5 +45,5 @@ Route::controller(CandidateController::class)
 Route::controller(WinnerController::class)
     ->middleware(['auth'])
     ->group(function () {
-        Route::get('/winners/{type}/store', 'store');
+        Route::patch('/winners/{type}/store', 'store');
     });

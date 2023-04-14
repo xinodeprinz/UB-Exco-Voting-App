@@ -61,7 +61,7 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
             setIsVotingPeriod('more');
     }
 
-    const votingTime = () => {
+    const votingTime = async () => {
         const timeout = setTimeout(() => {
             const distance = endTime - now;
             const hours = Math.floor(
@@ -73,9 +73,11 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
         }, 1000);
 
         if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+            // Time up
             clearTimeout(timeout);
             setShowPosition(true);
-            sweetAlert({ icon: 'info', title: 'Time up! Voting ended.' });
+            const res = await axios.patch(`/winners/${type}/store`);
+            sweetAlert({ icon: 'info', title: res.data.message });
         }
 
         if (time.hours === 0 && time.minutes < 11) {
