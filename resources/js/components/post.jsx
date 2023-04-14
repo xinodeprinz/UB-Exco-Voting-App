@@ -11,7 +11,7 @@ const Post = ({ triggerModal, post }) => {
         </p>
         <Link
           className={`card-link text-capitalize ${styles.link}`}
-          to={`/${post.name.replaceAll(" ", "-")}/about`}
+          href={`/${post.name.replaceAll(" ", "-")}/about`}
         >
           Read More
         </Link> <hr />
@@ -20,8 +20,8 @@ const Post = ({ triggerModal, post }) => {
             <h6 className={styles.candTitle}>number of candidates</h6>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <div className={styles.candidates}>Faculty: 0</div>
-            <div className={styles.candidates}>Department: 0</div>
+            <div className={styles.candidates}>Faculty: {post.facultyCandidates}</div>
+            <div className={styles.candidates}>Department: {post.departmentCandidates}</div>
           </div>
         </div>
 

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WinnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +29,21 @@ Route::controller(HomeController::class)
         Route::get('/home', 'index');
         Route::get('/posts', 'posts');
         Route::get('/user', 'authUser');
+        Route::post('/candidates/create', 'createCandidate');
+        Route::get('/{name}/about', 'aboutPost');
+    });
+
+Route::controller(CandidateController::class)
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('/{type}/{postName}/candidates', 'index');
+        Route::get('/{type}/{postName}/elections', 'elections');
+        Route::patch('/vote/{candidateId}', 'vote');
+        Route::get('/{postName}/{type}/refetch-candidates', 'fetchCandidates');
+    });
+
+Route::controller(WinnerController::class)
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('/winners/{type}/store', 'store');
     });

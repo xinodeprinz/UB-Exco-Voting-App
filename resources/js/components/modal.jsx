@@ -1,6 +1,7 @@
 import styles from "../../css/modules/modal.module.css";
+import { FaTrash } from "react-icons/fa";
 
-const Modal = ({ becomeACandidate }) => {
+const Modal = ({ becomeACandidate, post }) => {
   return (
     <>
       <button
@@ -24,7 +25,7 @@ const Modal = ({ becomeACandidate }) => {
             <div className="modal-header">
               <h5 className={`modal-title ${styles.title}`}>
                 selected post:
-                <span>president</span>
+                <span>{post.name}</span>
               </h5>
               <button
                 type="button"
@@ -36,16 +37,24 @@ const Modal = ({ becomeACandidate }) => {
             </div>
             <div className="modal-body">
               <button
-                className={`btn ${styles.faculty}`}
+                className={`btn ${post.isFacultyCandidate ? styles.remove : styles.faculty}`}
                 onClick={() => becomeACandidate("faculty")}
               >
-                faculty level
+                {post.isFacultyCandidate ?
+                  <div className="d-flex justify-content-center align-items-center">
+                    <FaTrash />
+                    <span className="ms-1">Remove - Faculty</span>
+                  </div> : 'faculty level'}
               </button>
               <button
-                className={`btn ${styles.department}`}
+                className={`btn ${post.isDepartmentCandidate ? styles.remove : styles.department}`}
                 onClick={() => becomeACandidate("department")}
               >
-                departmental level
+                {post.isDepartmentCandidate ?
+                  <div className="d-flex justify-content-center align-items-center">
+                    <FaTrash />
+                    <span className="ms-1">Remove - Department</span>
+                  </div> : 'departmental level'}
               </button>
             </div>
           </div>

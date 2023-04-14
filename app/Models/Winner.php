@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Winner extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
+        'user_id',
+        'post_id',
+        'type',
     ];
-
-    public function candidates()
-    {
-        return $this->hasMany(Candidate::class);
-    }
 }

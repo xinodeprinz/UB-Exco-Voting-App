@@ -1,5 +1,6 @@
 import styles from "../../css/modules/sidebar.module.css";
 import UBLogo from "../../images/ub-logo.png";
+import config from "../config";
 import Links from "./links";
 
 const Sidebar = () => {
@@ -15,7 +16,7 @@ const Sidebar = () => {
               className={styles.logoImage}
               alt="UB Exco Voting App"
             />
-            <h1 className={styles.title}>UB Expo Voting App</h1>
+            <h1 className={styles.title}>{config.appName}</h1>
           </div>
 
           <ul className="nav flex-column">

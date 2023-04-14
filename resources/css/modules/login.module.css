@@ -1,4 +1,5 @@
 @import "./colors.css";
+
 .main {
     height: 100vh;
     width: 100vw;
@@ -99,10 +100,11 @@
     .main {
         height: 100vh;
         width: 100vw;
-        background-image: url('../images/vote-img.png');
+        background-image: url('../../images/vote-img.png');
         padding-left: 0;
         padding-right: 0;
     }
+
     .form {
         border-radius: 0;
     }

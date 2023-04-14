@@ -14,7 +14,8 @@
 }
 
 .faculty,
-.department {
+.department,
+.remove {
   display: block;
   border-radius: 0;
   width: 100%;
@@ -33,7 +34,8 @@
 }
 
 .faculty:hover,
-.department:hover {
+.department:hover,
+.remove:hover {
   opacity: 0.8;
   background-color: inherit;
 }
@@ -41,5 +43,12 @@
 .department,
 .department:hover {
   background-color: var(--secondary) !important;
+  color: white !important;
+}
+
+.remove,
+.remove:hover {
+  background-color: var(--danger) !important;
+  margin-bottom: 0.7rem !important;
   color: white !important;
 }

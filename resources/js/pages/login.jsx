@@ -4,6 +4,7 @@ import vote from "../../images/vote-img.png";
 import sweetAlert from "../components/alert";
 import { useState } from "react";
 import axios from "../components/axios";
+import config from "../config";
 
 const Login = () => {
 
@@ -35,7 +36,7 @@ const Login = () => {
                                     className={styles.logo}
                                     alt="University of Buea"
                                 />
-                                <h1 className={styles.title}>UB Exco Voting App</h1>
+                                <h1 className={styles.title}>{config.appName}</h1>
                             </div>
 
                             {/* <h1 className={styles.subtitle}>welcome back</h1> */}

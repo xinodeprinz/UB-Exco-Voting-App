@@ -14,4 +14,14 @@ class Candidate extends Model
         'post_id',
         'type',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasOne(Vote::class);
+    }
 }

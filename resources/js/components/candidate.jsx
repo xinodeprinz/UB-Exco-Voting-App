@@ -1,14 +1,13 @@
 import { FaTrash } from "react-icons/fa";
-import styles from "../modules/candidate.module.css";
-import { ButtonSpinner } from "./helpers";
+import styles from "../../css/modules/candidate.module.css";
 
 const Candidate = ({
   isElection = false,
   isWinner = false,
   showPosition = false,
   candidate,
-  handleVote,
-  loading = false,
+  handleVote = null,
+  canVote = true,
 }) => {
   return (
     <div className={`card shadow-lg h-100 ${styles.card}`}>
@@ -25,7 +24,7 @@ const Candidate = ({
       ) : null}
 
       <img
-        src={process.env.REACT_APP_IMAGE + candidate.photo}
+        src={'/storage/' + candidate.photo}
         alt={candidate.name}
         className={`card-img-top ${styles.image}`}
       />
@@ -37,26 +36,17 @@ const Candidate = ({
           </div>
           <div>{candidate.level}</div>
         </div>
-        {isElection ? (
+        {isElection && canVote ? (
           <button
-            className={`btn  d-flex justify-content-center align-items-center ${
-              candidate.hasVoted ? styles.voted : styles.btn
-            }`}
+            className={`btn  d-flex justify-content-center align-items-center 
+            ${candidate.hasVoted ? styles.voted : styles.btn
+              }`}
             onClick={() => handleVote(candidate.candidate_id)}
           >
-            {loading ? (
-              <ButtonSpinner
-                text={candidate.hasVoted ? "unvoting..." : "voting..."}
-              />
-            ) : (
-              <>
-                {" "}
-                {candidate.hasVoted && <FaTrash />}
-                <span className={candidate.hasVoted ? "ms-1" : ""}>
-                  {candidate.hasVoted ? "unvote" : "vote"}
-                </span>
-              </>
-            )}
+            {candidate.hasVoted && <FaTrash />}
+            <span className={candidate.hasVoted ? "ms-1" : ""}>
+              {candidate.hasVoted ? "unvote" : "vote"}
+            </span>
           </button>
         ) : null}
         {isWinner ? <div className={styles.post}>COT president</div> : null}
