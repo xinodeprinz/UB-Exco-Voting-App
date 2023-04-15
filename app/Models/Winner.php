@@ -12,6 +12,17 @@ class Winner extends Model
     protected $fillable = [
         'user_id',
         'post_id',
+        'candidate_id',
         'type',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class);
+    }
 }

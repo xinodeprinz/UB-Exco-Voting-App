@@ -8,6 +8,8 @@ use App\Models\Candidate;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Winner;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class WinnerController extends Controller
 {
@@ -53,11 +55,32 @@ class WinnerController extends Controller
                             ->where('type', $cWinner->type)
                             ->exists()
                     ) {
-                        Winner::create($cWinner->toArray());
+                        $data = $cWinner->toArray();
+                        $data['candidate_id'] = $winnerId;
+                        Winner::create($data);
                     }
                 }
             }
         }
         return response()->json(['message' => 'Time up! Voting ended.']);
+    }
+
+    public function index(string $type)
+    {
+        $user = Auth::user();
+        $ww = Winner::where('type', $type)->get();
+        $winners = [];
+        foreach ($ww as $w) {
+            if (
+                ($type === 'faculty' && $w->user->faculty === $user->faculty) ||
+                ($type === 'department' && $w->user->department === $user->department)
+            ) {
+                //Please sort array from president to walfare officer
+                $w->user->post = $w->candidate->post->name;
+                array_push($winners, $w->user);
+            }
+        }
+
+        return Inertia::render('winners', compact('winners', 'type'));
     }
 }

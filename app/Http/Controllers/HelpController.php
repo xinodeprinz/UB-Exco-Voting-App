@@ -141,4 +141,65 @@ class HelpController extends Controller
         }
         return $id;
     }
+
+    public static function calcPositions(array $candidates): array
+    {
+        if (Winner::count() <= 0) {
+            foreach ($candidates as $c) {
+                $c->position = null;
+            }
+            return $candidates;
+        }
+
+        $voteArray = [];
+        $sortedVoteArray = [];
+        $newCandidates = [];
+
+        foreach ($candidates as $u) {
+            $c = Candidate::find($u->candidate_id);
+            $voteArray[] = [
+                'c_id' => $c->id,
+                'votes' => count(
+                    $c->votes ? json_decode($c->votes->voters) : []
+                ),
+            ];
+        }
+
+        // Sorting the vote array
+        $turns = count($voteArray);
+        for ($i = 0; $i < $turns; $i++) {
+            $maxVote = self::maxVote($voteArray);
+            array_push($sortedVoteArray, $maxVote);
+            $maxId = array_search($maxVote, $voteArray);
+            unset($voteArray[$maxId]);
+        }
+
+        unset($voteArray); //Destroy the vote array.
+
+        // Sorting the candidate users array.
+        foreach ($sortedVoteArray as $s) {
+            foreach ($candidates as $c) {
+                if ($s['c_id'] == $c->candidate_id) {
+                    $c->position = array_search($s, $sortedVoteArray) + 1;
+                    array_push($newCandidates, $c);
+                    break;
+                }
+            }
+        }
+
+        //Destroy the candidates and sortedVoteArray.
+        unset($candidates, $sortedVoteArray);
+
+        return $newCandidates;
+    }
+
+    protected static function maxVote(array $votes): array
+    {
+        $max = array_shift($votes);
+        for ($i = 1; $i < count($votes); $i++) {
+            if ($votes[$i]['votes'] > $max['votes'])
+                $max = $votes[$i];
+        }
+        return $max;
+    }
 }

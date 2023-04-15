@@ -46,4 +46,5 @@ Route::controller(WinnerController::class)
     ->middleware(['auth'])
     ->group(function () {
         Route::patch('/winners/{type}/store', 'store');
+        Route::get('/{type}/winners', 'index');
     });

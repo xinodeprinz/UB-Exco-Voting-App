@@ -80,10 +80,10 @@ const Links = ({ uri, styles }) => {
           <span className="ms-1">winners</span>
         </Link>
         <div className="dropdown-menu">
-          <Link href="/faculty/president/winners" className="dropdown-item">
+          <Link href="/faculty/winners" className="dropdown-item">
             Faculty
           </Link>
-          <Link href="/department/president/winners" className="dropdown-item">
+          <Link href="/department/winners" className="dropdown-item">
             Departmental
           </Link>
         </div>

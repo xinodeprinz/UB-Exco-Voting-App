@@ -9,14 +9,28 @@ const Candidate = ({
   handleVote = null,
   canVote = true,
 }) => {
+  const positionSuper = (position) => {
+    position = String(position);
+    const lastEl = position[position.length - 1];
+    let ps = 'th';
+    if (lastEl == 1)
+      ps = 'st';
+    else if (lastEl == 2)
+      ps = 'nd';
+    else if (lastEl == 3)
+      ps = 'rd';
+    return ps;
+  }
   return (
     <div className={`card shadow-lg h-100 ${styles.card}`}>
       {isElection ? (
         <>
           <div className={styles.votes}>{candidate.votes} votes</div>
-          {showPosition && (
+          {showPosition && candidate.position && (
             <div className={styles.position}>
-              1<sup>st</sup>
+              {candidate.position}<sup>{positionSuper(
+                candidate.position
+              )}</sup>
               <span className={styles.winner}></span>
             </div>
           )}
@@ -49,7 +63,7 @@ const Candidate = ({
             </span>
           </button>
         ) : null}
-        {isWinner ? <div className={styles.post}>COT president</div> : null}
+        {isWinner ? <div className={styles.post}>{candidate.post}</div> : null}
       </div>
     </div>
   );

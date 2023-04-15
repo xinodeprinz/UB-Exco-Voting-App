@@ -33,7 +33,14 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
             config.facultyStartTime : config.deptStartTime
     ).getTime();
     const endTime = startTime + config.duration * 60 * 1000;
+    const positionDuration = config.positionDuration * 60 * 1000;
     const now = new Date().getTime();
+
+    // Show position
+    if (now > endTime && now < (endTime + positionDuration) && !showPosition) {
+        setShowPosition(true);
+        setCanVote(false);
+    }
 
 
     useEffect(() => {
@@ -46,19 +53,23 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
         }
 
         // Update the DOM every five seconds.
-        // setTimeout(async () => {
-        //     const res = await axios.get(`/${postName}/${type}/refetch-candidates`);
-        //     setCandidates(res.data);
-        // }, 5000);
-    });
+        if (isVotingPeriod === true) {
+            setTimeout(async () => {
+                const res = await axios.get(`/${postName}/${type}/refetch-candidates`);
+                setCandidates(res.data);
+            }, 5000);
+        }
+    }, [time, showPosition]);
 
     const verifyPeriod = () => {
         if (now >= startTime && now < endTime)
             setIsVotingPeriod(true);
         else if (now < startTime)
             setIsVotingPeriod('less');
-        else
+        else {
             setIsVotingPeriod('more');
+            setShowPosition(false);
+        }
     }
 
     const votingTime = async () => {
@@ -78,9 +89,13 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
             setShowPosition(true);
             const res = await axios.patch(`/winners/${type}/store`);
             sweetAlert({ icon: 'info', title: res.data.message });
+            // Reload the page 3 seconds after the elections.
+            return setTimeout(() => {
+                window.location.reload();
+            }, 5000);
         }
 
-        if (time.hours === 0 && time.minutes < 11) {
+        if (time.hours === 0 && time.minutes < 10) {
             setTimerColour("lessTime"); //Changes the timer colour to red.
         }
     };
@@ -108,20 +123,28 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
                 </div>
             </div>
 
-            {isVotingPeriod === true && <>
-                <div className="d-md-flex justify-content-between align-items-center">
-                    <div className="section-title">
-                        <h1>{postName.replaceAll("-", " ")} candidates</h1>
-                    </div>
-                    <div className={`${styles[timerColour]} mb-3 mb-md-0`}>
-                        <span>voting ends in: </span>
-                        <span>
-                            {time.hours.toString().padStart(2, 0)}:
-                            {time.minutes.toString().padStart(2, 0)}:
-                            {time.seconds.toString().padStart(2, 0)}
-                        </span>
-                    </div>
+            {(isVotingPeriod === 'more' || showPosition) && (
+                <div className="alert alert-info text-center">
+                    The elections toke place on the {new Date(startTime).toLocaleString()}. Check the winners page for the winners of the elections.
                 </div>
+            )}
+
+            {(isVotingPeriod === true || showPosition) && <>
+                {isVotingPeriod && !showPosition && (
+                    <div className="d-md-flex justify-content-between align-items-center">
+                        <div className="section-title">
+                            <h1>{postName.replaceAll("-", " ")} candidates</h1>
+                        </div>
+                        <div className={`${styles[timerColour]} mb-3 mb-md-0`}>
+                            <span>voting ends in: </span>
+                            <span>
+                                {time.hours.toString().padStart(2, 0)}:
+                                {time.minutes.toString().padStart(2, 0)}:
+                                {time.seconds.toString().padStart(2, 0)}
+                            </span>
+                        </div>
+                    </div>
+                )}
 
                 {candidates.length > 0 ? (
                     <div className="row">
@@ -147,10 +170,6 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
             {isVotingPeriod === 'less' && <div className="alert alert-info text-center">
                 The elections is scheduled on the {new Date(startTime).toLocaleString()}.
                 {type === 'faculty' && <span> Only winners of the departmental elections will be eligible to vote.</span>}
-            </div>}
-
-            {isVotingPeriod === 'more' && <div className="alert alert-info text-center">
-                The elections toke place on the {new Date(startTime).toLocaleString()}. Check the winners page for the winners of the elections.
             </div>}
         </Layout>
     );

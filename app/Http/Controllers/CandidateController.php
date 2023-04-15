@@ -30,7 +30,10 @@ class CandidateController extends Controller
         [$candidates, $cc] = Help::candidates($type, $postName);
         $postNames = Post::pluck('name');
 
-        $initalCandidates = Help::votingCandidates($type, $candidates);
+        // Calculate positions
+        $initalCandidates = Help::calcPositions(
+            Help::votingCandidates($type, $candidates)
+        );
 
         // Checking if the user is eligible to vote for a faculty elections.
         $canVoteForFaculty = Help::canVote();
@@ -63,7 +66,6 @@ class CandidateController extends Controller
         $types = Help::types();
 
         if (!in_array($request->type, $types)) {
-            $voters = [$user->id];
             return response()->json(['message' => "Invalid type"], 400);
         }
 

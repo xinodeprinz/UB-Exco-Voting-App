@@ -20,7 +20,7 @@ const Login = () => {
         sweetAlert({ icon: "success", title: res.data.message });
         return setTimeout(() => {
             window.location.pathname = '/home';
-        }, 4000);
+        }, 2500);
     };
     return (
         <div className={styles.main}>
