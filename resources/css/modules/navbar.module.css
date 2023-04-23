@@ -56,3 +56,11 @@
   margin-right: 1rem;
   border-radius: 5px;
 }
+
+.navbar {
+  position: fixed !important;
+  width: inherit !important;
+  top: 0;
+  z-index: 99 !important;
+  background: white !important;
+}

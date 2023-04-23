@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "../components/axios";
 import config from "../config";
 import { router } from "@inertiajs/react";
+import Head from "../components/head";
 
 const Login = () => {
 
@@ -23,6 +24,7 @@ const Login = () => {
     };
     return (
         <div className={styles.main}>
+            <Head />
             <div className={styles.center}>
                 <div className="container">
                     <div className="row g-0">

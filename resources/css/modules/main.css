@@ -35,3 +35,7 @@
 .text-main {
   color: var(--tick-blue) !important;
 }
+
+.main {
+  margin-top: 6.5rem;
+}
