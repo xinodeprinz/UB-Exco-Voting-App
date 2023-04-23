@@ -15,6 +15,7 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
     const [showPosition, setShowPosition] = useState(false);
     const [isVotingPeriod, setIsVotingPeriod] = useState(null);
     const [canVote, setCanVote] = useState(true);
+    const [disabled, setDisabled] = useState(false);
 
     const handlePost = (name) => {
         router.get(`/${type}/${name}/elections`);
@@ -25,6 +26,14 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
         const res = await axios.patch(`/vote/${candidateId}`, data);
         setCandidates(res.data.candidates);
         sweetAlert({ icon: 'success', title: res.data.message });
+    }
+
+    const shouldDisable = () => {
+        candidates.forEach(c => {
+            if (c.hasVoted) {
+                return setDisabled(true);
+            }
+        })
     }
 
     // Unchanging variables
@@ -46,6 +55,7 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
     useEffect(() => {
         verifyPeriod();
         votingTime();
+        shouldDisable();
 
         // Checking if user can vote
         if (type === 'faculty' && !canVoteForFaculty) {
@@ -157,6 +167,7 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
                                     handleVote={handleVote}
                                     showPosition={showPosition}
                                     canVote={canVote}
+                                    disabled={disabled}
                                 />
                             </div>
                         ))}

@@ -81,4 +81,16 @@ class HomeController extends Controller
         $post->description = explode('|', $post->description);
         return Inertia::render('about', compact('post'));
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        // return to_route('login');
+        return response()->json(['message' => 'Logout successful!']);
+    }
 }

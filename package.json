@@ -15,7 +15,9 @@
     },
     "dependencies": {
         "@inertiajs/react": "^1.0.2",
+        "@zegocloud/zego-uikit-prebuilt": "^1.7.5",
         "react": "^18.2.0",
+        "react-datetime-picker": "^5.0.3",
         "react-dom": "^18.2.0",
         "react-icons": "^4.8.0",
         "sweetalert2": "^11.7.3"

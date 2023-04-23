@@ -5,6 +5,7 @@ import sweetAlert from "../components/alert";
 import { useState } from "react";
 import axios from "../components/axios";
 import config from "../config";
+import { router } from "@inertiajs/react";
 
 const Login = () => {
 
@@ -18,9 +19,7 @@ const Login = () => {
         e.preventDefault();
         const res = await axios.post('/', data);
         sweetAlert({ icon: "success", title: res.data.message });
-        return setTimeout(() => {
-            window.location.pathname = '/home';
-        }, 2500);
+        return router.get('/home');
     };
     return (
         <div className={styles.main}>

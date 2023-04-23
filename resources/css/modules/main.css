@@ -26,3 +26,12 @@
   display: inline-block;
   font-size: 30px;
 }
+
+.form-label {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.text-main {
+  color: var(--tick-blue) !important;
+}

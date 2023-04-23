@@ -8,6 +8,7 @@ const Candidate = ({
   candidate,
   handleVote = null,
   canVote = true,
+  disabled = false,
 }) => {
   const positionSuper = (position) => {
     position = String(position);
@@ -56,6 +57,7 @@ const Candidate = ({
             ${candidate.hasVoted ? styles.voted : styles.btn
               }`}
             onClick={() => handleVote(candidate.candidate_id)}
+            disabled={!candidate.hasVoted ? disabled : false}
           >
             {candidate.hasVoted && <FaTrash />}
             <span className={candidate.hasVoted ? "ms-1" : ""}>

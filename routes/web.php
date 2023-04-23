@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WinnerController;
@@ -31,6 +32,7 @@ Route::controller(HomeController::class)
         Route::get('/user', 'authUser');
         Route::post('/candidates/create', 'createCandidate');
         Route::get('/{name}/about', 'aboutPost');
+        Route::post('/logout', 'logout');
     });
 
 Route::controller(CandidateController::class)
@@ -47,4 +49,14 @@ Route::controller(WinnerController::class)
     ->group(function () {
         Route::patch('/winners/{type}/store', 'store');
         Route::get('/{type}/winners', 'index');
+    });
+
+Route::controller(CampaignController::class)
+    ->middleware(['auth'])
+    ->prefix('campaign')
+    ->group(function () {
+        Route::get('/', 'campaign');
+        Route::get('/{campaignID}', 'meeting');
+        Route::post('/video/upload', 'uploadVideo');
+        Route::post('/create', 'createCampaign');
     });

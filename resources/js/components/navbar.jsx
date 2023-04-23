@@ -2,10 +2,11 @@ import styles from "../../css/modules/navbar.module.css";
 import { useEffect, useState, Fragment } from "react";
 import Links from "./links";
 import { FaSignOutAlt } from "react-icons/fa";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import axios from '../components/axios';
+import sweetAlert from "./alert";
 
-const Navbar = ({ isLoading = false, top }) => {
+const Navbar = () => {
 
   const [user, setUser] = useState(null);
 
@@ -18,7 +19,11 @@ const Navbar = ({ isLoading = false, top }) => {
     setUser(data);
   }
 
-  const logout = () => { }
+  const logout = async () => {
+    const res = await axios.post('/logout');
+    sweetAlert({ icon: 'success', title: res.data.message });
+    return router.get('/');
+  }
 
   return (
     <Fragment>

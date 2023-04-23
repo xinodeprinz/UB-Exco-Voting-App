@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use App\Models\Candidate;
 use App\Models\Post;
 use App\Models\Winner;
@@ -201,5 +202,23 @@ class HelpController extends Controller
                 $max = $votes[$i];
         }
         return $max;
+    }
+
+    public static function randomCampaignID(int $length): string
+    {
+        $take = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $output = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($take) - 1);
+            $output .= $take[$index];
+        }
+
+        $existingIDs = Campaign::pluck('campaign_id');
+
+        if (in_array($output, $existingIDs->toArray()))
+            self::randomCampaignID($length);
+
+        return $output;
     }
 }
