@@ -29,11 +29,17 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
     }
 
     const shouldDisable = () => {
-        candidates.forEach(c => {
+        const hasVotedArray = [];
+        for (let c of candidates) {
+            hasVotedArray.push(c.hasVoted);
             if (c.hasVoted) {
                 return setDisabled(true);
             }
-        })
+        }
+
+        if (!hasVotedArray.includes(true)) {
+            setDisabled(false);
+        }
     }
 
     // Unchanging variables

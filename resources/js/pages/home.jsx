@@ -1,42 +1,45 @@
-import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
-import styles from "../../css/modules/home.module.css";
+import React from "react";
 import Layout from "../components/layout";
+import { DefaultPlayer as Video } from "react-html5video";
+import "react-html5video/dist/styles.css";
 
-const Home = () => {
+const Home = ({ video }) => {
+    const { protocol, host } = window.location;
+    const server = `${protocol}//${host}`;
+
     return (
         <Layout>
             <div className="section-title">
-                <h1>about us</h1>
+                <h1>ongoing campaigns</h1>
             </div>
 
-            <p className={styles.p}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-                ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-                doloribus similique id culpa minus reprehenderit nemo aspernatur.
-                Voluptates quos ratione corrupti atque odio vero soluta illum
-                aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-                accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-            </p>
-
-            <ul className={styles.list}>
-                <li>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-                    ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-                    doloribus similique id culpa minus reprehenderit nemo aspernatur.
-                    Voluptates quos ratione corrupti atque odio vero soluta illum
-                    aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-                    accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-                </li>
-                <li>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-                    ipsam vel dignissimos inventore, modi consequatur, ullam, eius
-                    doloribus similique id culpa minus reprehenderit nemo aspernatur.
-                    Voluptates quos ratione corrupti atque odio vero soluta illum
-                    aliquid aliquam repellat quaerat commodi, natus numquam ipsam
-                    accusamus autem dolorum at fugit! Accusamus, repellat excepturi.
-                </li>
-            </ul>
+            {video ? (
+                <Video //autoPlay loop muted
+                    controls={[
+                        "PlayPause",
+                        "Seek",
+                        "Time",
+                        "Volume",
+                        "Fullscreen",
+                    ]}
+                    // poster="http://sourceposter.jpg"
+                    style={{ height: "80vh" }}
+                    preload="metadata"
+                    onCanPlayThrough={() => {
+                        // Do stuff
+                    }}
+                >
+                    <source
+                        src={`${server}/storage/${video.url}`}
+                        type="video/mp4"
+                    />
+                    {/* <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default /> */}
+                </Video>
+            ) : (
+                <div className="alert alert-info text-center">
+                    There are no ongoing campaigns at the moment.
+                </div>
+            )}
         </Layout>
     );
 };

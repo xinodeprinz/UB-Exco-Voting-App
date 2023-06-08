@@ -6,7 +6,7 @@ const Head = () => {
     const [title, setTitle] = useState(config.appName);
     useEffect(() => {
         const route = window.location.pathname.replaceAll('/', '-');
-        setTitle(`${config.appName} | ${route.substr(1, route.length - 1)}`);
+        setTitle(`${config.appName} | ${route.substr(1, route.length - 1) || 'Login'}`);
     }, [title]);
     return (
         <Helmet>

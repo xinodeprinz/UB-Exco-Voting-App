@@ -54,3 +54,16 @@
     box-shadow: none !important;
     border-color: var(--tick-blue) !important;
 }
+
+.videoSelect {
+    background-color: var(--secondary) !important;
+    border-radius: 0 !important;
+    color: white !important;
+    height: 3rem !important;
+    margin-left: 0.5rem !important;
+    text-transform: capitalize !important;
+}
+
+.videoSelect:hover {
+    opacity: 0.8 !important;
+}

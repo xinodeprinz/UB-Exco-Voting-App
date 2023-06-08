@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HelpController as Help;
+use App\Models\Video;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -13,7 +14,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('home');
+        $video = Video::inRandomOrder()->limit(1)->first();
+        return Inertia::render('home', compact('video'));
     }
 
     public function posts()

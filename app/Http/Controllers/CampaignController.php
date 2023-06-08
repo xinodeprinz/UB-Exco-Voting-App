@@ -16,7 +16,9 @@ class CampaignController extends Controller
     public function campaign()
     {
         $genID = Help::randomCampaignID(5);
-        return Inertia::render('campaign', compact('genID'));
+        $user = Auth::user();
+        $isCandidate = $user->candidates ? true : false;
+        return Inertia::render('campaign', compact('genID', 'isCandidate'));
     }
 
     public function meeting(string $campaignID)
@@ -34,17 +36,17 @@ class CampaignController extends Controller
 
     public function uploadVideo(Request $request)
     {
-        $user = Auth::user();
-        $candidate = Candidate::where('user_id', $user->id)->first();
-
         // This validation needs adjustments.
         $val = Validator::make($request->all(), [
-            'video' => 'mimes:mp4,mkv,mov,avi,wmv,flv,webm,avchd|max:5120000', //500MB
+            'video' => 'required|file|mimes:mp4,mkv,mov,avi,wmv,flv,webm,avchd|max:1048576', //1GB
         ]);
 
         if ($val->fails()) {
             return response()->json(['message' => Help::ValError($val)], 422);
         }
+
+        $user = Auth::user();
+        $candidate = Candidate::where('user_id', $user->id)->first();
 
         $videoPath = $request->file('video')->store('videos', 'public');
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 11:11 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Jun 08, 2023 at 03:22 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,9 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`id`, `candidate_id`, `campaign_id`, `scheduled_on`, `created_at`, `updated_at`) VALUES
-(1, 1, '7F6Hh', '2023-06-08 07:50:53', '2023-06-08 06:51:06', '2023-06-08 06:51:06');
+(1, 1, '7F6Hh', '2023-06-08 07:50:53', '2023-06-08 06:51:06', '2023-06-08 06:51:06'),
+(2, 1, 'VtcJq', '2023-06-17 12:51:00', '2023-06-08 10:51:58', '2023-06-08 10:51:58'),
+(3, 1, 'DcTVY', '2023-06-25 13:31:00', '2023-06-08 11:31:23', '2023-06-08 11:31:23');
 
 -- --------------------------------------------------------
 
@@ -249,6 +251,16 @@ CREATE TABLE `videos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`id`, `candidate_id`, `url`, `created_at`, `updated_at`) VALUES
+(2, 1, 'videos/eSjCyiheSTnZR1ihsDtbW58cY4dwSEvLf6clzITt.mp4', '2023-06-08 11:31:55', '2023-06-08 11:31:55'),
+(5, 1, 'videos/pnoAk4fHllBpphkGpsuIbDDmJnXAaosVn4UX393m.mp4', '2023-06-08 11:44:07', '2023-06-08 11:44:07'),
+(6, 1, 'videos/aPZ7HGJGO3OtSpw25yOiY22r76jNotZj22B1A4Qd.mp4', '2023-06-08 12:04:09', '2023-06-08 12:04:09'),
+(7, 1, 'videos/JG4KMPDx6IGrfwik8VmsWaKftwJ3GmslB25uneNS.mp4', '2023-06-08 12:13:47', '2023-06-08 12:13:47');
+
 -- --------------------------------------------------------
 
 --
@@ -268,7 +280,7 @@ CREATE TABLE `votes` (
 --
 
 INSERT INTO `votes` (`id`, `candidate_id`, `voters`, `created_at`, `updated_at`) VALUES
-(1, 1, '[1]', '2023-06-08 06:38:40', '2023-06-08 06:39:19');
+(2, 1, '[]', '2023-06-08 12:19:26', '2023-06-08 12:19:32');
 
 -- --------------------------------------------------------
 
@@ -285,16 +297,6 @@ CREATE TABLE `winners` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `winners`
---
-
-INSERT INTO `winners` (`id`, `user_id`, `post_id`, `candidate_id`, `type`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'department', '2023-06-08 06:42:01', '2023-06-08 06:42:01'),
-(2, 9, 2, 9, 'department', '2023-06-08 06:42:01', '2023-06-08 06:42:01'),
-(3, 10, 3, 10, 'department', '2023-06-08 06:42:01', '2023-06-08 06:42:01'),
-(4, 15, 4, 15, 'department', '2023-06-08 06:42:01', '2023-06-08 06:42:01');
 
 --
 -- Indexes for dumped tables
@@ -386,13 +388,13 @@ ALTER TABLE `winners`
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `candidates`
 --
 ALTER TABLE `candidates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -428,19 +430,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `winners`
 --
 ALTER TABLE `winners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
