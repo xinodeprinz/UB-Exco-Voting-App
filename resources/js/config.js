@@ -1,8 +1,8 @@
 export default {
     appName: "UB Exco Voting App",
-    deptStartTime: "2023-04-17 20:21:00",
+    deptStartTime: "2023-06-08 08:40:00",
     facultyStartTime: "2023-04-14 12:09:00",
-    duration: 200, //In minutes
+    duration: 2, //In minutes
     positionDuration: 1, //In minutes
 }
 

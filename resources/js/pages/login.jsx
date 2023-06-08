@@ -50,6 +50,7 @@ const Login = () => {
                                         onChange={handleInput}
                                         placeholder="Matricule"
                                         className={`form-control ${styles.formControl}`}
+                                        autoComplete="off"
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -59,6 +60,7 @@ const Login = () => {
                                         onChange={handleInput}
                                         placeholder="Password"
                                         className={`form-control ${styles.formControl}`}
+                                        autoComplete="off"
                                     />
                                 </div>
                                 <div className={styles.check}>

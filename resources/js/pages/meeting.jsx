@@ -6,8 +6,8 @@ const Meeting = ({ campaignID, user, campaign }) => {
     const meeting = async (element) => {
 
         // generate Kit Token
-        const appID = 1578031313;
-        const serverSecret = "8b4f77df94b12d4597c32ad8bf6dd34b";
+        const appID = 1112295610;
+        const serverSecret = "4a6d13fe448b5b35ce4aecb0209d62de";
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
             appID,
             serverSecret,
