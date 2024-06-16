@@ -32,7 +32,7 @@ jobs:
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASS }}
+        password: ${{ secrets.FTP_PASSWORD }}
 
     - name: SSH into cPanel and run Composer & NPM
       uses: appleboy/ssh-action@v0.1.4
