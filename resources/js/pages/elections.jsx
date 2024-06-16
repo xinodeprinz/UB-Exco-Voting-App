@@ -7,7 +7,7 @@ import axios from '../components/axios';
 import sweetAlert from '../components/alert';
 import config from '../config';
 
-const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFaculty }) => {
+const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFaculty, electionsData }) => {
 
     const [candidates, setCandidates] = useState(initalCandidates);
     const [timerColour, setTimerColour] = useState("time");
@@ -45,10 +45,10 @@ const Elections = ({ initalCandidates, postNames, postName, type, canVoteForFacu
     // Unchanging variables
     const startTime = new Date(
         type === 'faculty' ?
-            config.facultyStartTime : config.deptStartTime
+            electionsData.facultyStartTime : electionsData.deptStartTime
     ).getTime();
-    const endTime = startTime + config.duration * 60 * 1000;
-    const positionDuration = config.positionDuration * 60 * 1000;
+    const endTime = startTime + electionsData.duration * 60 * 1000;
+    const positionDuration = electionsData.positionDuration * 60 * 1000;
     const now = new Date().getTime();
 
     // Show position
