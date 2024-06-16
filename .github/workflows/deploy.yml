@@ -27,14 +27,12 @@ jobs:
     - name: Install NPM Dependencies
       run: npm install && npm run build
 
-    - name: Upload to cPanel via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+    - name: 📂 Sync files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local-dir: ./ # Local directory to upload from
-        server-dir: /public_html/ # Remote directory to upload to (adjust as needed)
 
     - name: SSH into cPanel and run Composer & NPM
       uses: appleboy/ssh-action@v0.1.4
