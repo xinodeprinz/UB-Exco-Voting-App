@@ -1,0 +1,49 @@
+name: Deploy UB Exco Voting App to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2
+
+    - name: Install Composer
+      run: sudo apt-get update && sudo apt-get install -y curl php-cli php-mbstring git unzip && curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
+
+    - name: Install NPM
+      run: sudo apt-get install -y npm
+
+    - name: Install Composer Dependencies
+      run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+    - name: Install NPM Dependencies
+      run: npm install && npm run production
+
+    - name: Upload to cPanel via FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local-dir: ./ # Local directory to upload from
+        server-dir: /public_html/ # Remote directory to upload to (adjust as needed)
+
+    - name: SSH into cPanel and run Composer & NPM
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{ secrets.CPANEL_SERVER }}
+        username: ${{ secrets.CPANEL_SSH_USERNAME }}
+        key: ${{ secrets.CPANEL_SSH_KEY }}
+        script: |
+          cd /public_html/ # Navigate to your project's root directory
+          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+          npm install
+          npm run production
