@@ -40,10 +40,10 @@ class CandidateController extends Controller
 
         // Elections data
         $electionsData = [
-            deptStartTime => "2024-06-16 06:19:00",
-            facultyStartTime => "2024-06-17 14:29:00",
-            duration => 90, //In minutes
-            positionDuration => 1, //In minutes
+            "deptStartTime" => "2024-06-16 06:19:00",
+            "facultyStartTime" => "2024-06-17 14:29:00",
+            "duration" => 90, //In minutes
+            "positionDuration" => 1, //In minutes
         ];
 
         return Inertia::render('elections', compact(
