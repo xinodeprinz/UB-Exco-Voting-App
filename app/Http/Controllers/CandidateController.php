@@ -40,7 +40,7 @@ class CandidateController extends Controller
 
         // Elections data
         $electionsData = [
-            "deptStartTime" => "2024-07-24 12:15:00",
+            "deptStartTime" => "2024-07-24 15:00:00",
             "facultyStartTime" => "2024-07-24 15:30:00",
             "duration" => 90, //In minutes
             "positionDuration" => 1, //In minutes
